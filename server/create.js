@@ -15,11 +15,14 @@ function getServiceFunctions(serviceDef) {
   return Object.keys(serviceDef).reduce((serviceFuncs, funcName) => {
     const func = serviceDef[funcName];
     serviceFuncs[funcName] = (call, callback) => {
-      const segment = new AWSXRay.Segment('app');
+      const metadata = call.metadata;
+      const traceId = metadata.get('traceId');
+      const segmentId = metadata.get('segmentId');
+      const segment = new AWSXRay.Segment('app', traceId, segmentId);
       const ns = AWSXRay.getNamespace();
 
       ns.run(() => {
-        AWSXRay.setSegment(segment, call.metadata.tradeId, call.metadata.segmentId);
+        AWSXRay.setSegment(segment);
         callback(null, func(call.request));
         segment.close();
       });
