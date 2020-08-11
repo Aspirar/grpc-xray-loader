@@ -19,10 +19,10 @@ function getServiceFunctions(serviceDef) {
       const ns = AWSXRay.getNamespace();
 
       ns.run(() => {
-        AWSXRay.setSegment(segment);
+        AWSXRay.setSegment(segment, call.metadata.tradeId, call.metadata.segmentId);
         callback(null, func(call.request));
         segment.close();
-      })
+      });
     };
     return serviceFuncs;
   }, {})
