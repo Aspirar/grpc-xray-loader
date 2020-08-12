@@ -25,7 +25,7 @@ const clients = files.filter(file => file.endsWith('.proto')).reduce((acc, file)
       const segment = AWSXRay.getSegment();
       metadata.add('traceId', segment.trace_id);
       metadata.add('segmentId', segment.id);
-      return promisifiedFunc.call(client, args);
+      return promisifiedFunc.call(client, args, metadata);
     }
   }
   

@@ -4,7 +4,7 @@ const AWSXRay = require('aws-xray-sdk');
 AWSXRay.capturePromise();
 
 async function run() {
-  const segment = new AWSXRay.Segment('app');
+  const segment = new AWSXRay.Segment('client-app');
   const ns = AWSXRay.getNamespace();
 
   ns.run(async () => {
