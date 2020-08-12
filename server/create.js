@@ -16,8 +16,8 @@ function getServiceFunctions(serviceDef) {
     const func = serviceDef[funcName];
     serviceFuncs[funcName] = (call, callback) => {
       const metadata = call.metadata;
-      const traceId = metadata.get('traceId');
-      const segmentId = metadata.get('segmentId');
+      const traceId = metadata.get('traceId').toString();
+      const segmentId = metadata.get('segmentId').toString();
       const segment = new AWSXRay.Segment('server-app', traceId, segmentId);
       const ns = AWSXRay.getNamespace();
 

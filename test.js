@@ -1,6 +1,8 @@
 const AWSXRay = require('aws-xray-sdk');
 
-const segment = new AWSXRay.Segment('app', '1-5f338728-a947f614094960a86a7a98b9', '46859f1a5ed7d69e');
+const traceId = '1-5f338728-a947f614094960a86a7a98b9';
+const segmentId = '46859f1a5ed7d69e';
+const segment = new AWSXRay.Segment('app', traceId, segmentId);
 console.log(segment);
 const ns = AWSXRay.getNamespace();
 
